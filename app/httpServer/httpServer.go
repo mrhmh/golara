@@ -1,22 +1,18 @@
-package app
+package httpServer
 
 import (
 	"fmt"
 	"github.com/labstack/echo/v4"
+	"golara/app/config"
 	"golara/routes"
 	"log"
 	"reflect"
 )
 
-var e = echo.New()
+func InitHttpServer() {
+	e := echo.New()
 
-type HttpServer struct {
-	public echo.Group
-}
-
-func httpServerServiceProvider() {
-
-	for _, route := range routes.GetRoutes() {
+	for _, route := range routes.Routes {
 
 		if reflect.TypeOf(route).String() != "contracts.Route" {
 			log.Fatalf("Type of route is mismatch!")
@@ -32,5 +28,5 @@ func httpServerServiceProvider() {
 		}
 	}
 
-	e.Start(fmt.Sprintf(":%d", Config.App.Port))
+	e.Start(fmt.Sprintf(":%d", config.Config().App.Port))
 }

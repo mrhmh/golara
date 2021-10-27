@@ -5,20 +5,20 @@ import (
 	"golara/http/controllers"
 )
 
-func GetRoutes() []contracts.Route {
-
-	routes := []contracts.Route{
-		{
-			Method:     "GET",
-			Path:       "/",
-			Controller: controllers.Index,
-		},
-		{
-			Method:     "GET",
-			Path:       "/questions",
-			Controller: controllers.IndexQuestion,
-		},
-	}
-
-	return routes
+var Routes = []contracts.Route{
+	{
+		Method:     "GET",
+		Path:       "/",
+		Controller: controllers.Index,
+	},
+	{
+		Method:     "GET",
+		Path:       "/questions",
+		Controller: controllers.IndexQuestion,
+	},
+	{
+		Method:     "GET",
+		Path:       "/questions/:id",
+		Controller: controllers.ShowQuestion,
+	},
 }

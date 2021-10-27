@@ -6,6 +6,6 @@ import (
 
 func main() {
 
-	app.RegisterServiceProviders()
+	app.Boot()
 
 }
