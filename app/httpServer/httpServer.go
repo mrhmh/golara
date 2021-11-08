@@ -2,31 +2,38 @@ package httpServer
 
 import (
 	"fmt"
-	"github.com/labstack/echo/v4"
+	"github.com/gin-gonic/gin"
 	"golara/app/config"
+	"golara/http/middleware"
 	"golara/routes"
-	"log"
 	"reflect"
 )
 
 func InitHttpServer() {
-	e := echo.New()
+	r := gin.Default()
 
-	for _, route := range routes.Routes {
+	r.Use(middleware.AuthToken)
+
+	v1 := r.Group("/ar/api/v1")
+	for _, route := range routes.GetRoutes() {
 
 		if reflect.TypeOf(route).String() != "contracts.Route" {
-			log.Fatalf("Type of route is mismatch!")
+			panic("Type of route is mismatch!")
 		}
 
 		switch route.Method {
 		case "GET":
-			e.GET(route.Path, route.Controller)
+			v1.GET(route.Path, route.Controller)
 		case "POST":
-			e.POST(route.Path, route.Controller)
+			v1.POST(route.Path, route.Controller)
 		case "PUT":
-			e.PUT(route.Path, route.Controller)
+			v1.PUT(route.Path, route.Controller)
 		}
 	}
 
-	e.Start(fmt.Sprintf(":%d", config.Config().App.Port))
+	r.NoRoute(func(c *gin.Context) {
+		c.JSON(404, gin.H{"message": "Not found!!"})
+	})
+
+	r.Run(fmt.Sprintf(":%d", config.Config().App.Port))
 }

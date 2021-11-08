@@ -1,26 +1,38 @@
 package controllers
 
 import (
-	"github.com/labstack/echo/v4"
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"golara/app/auth"
 	"golara/app/database"
 	"golara/models"
 	"net/http"
 	"strconv"
 )
 
-func Index(c echo.Context) error {
-	return c.String(http.StatusOK, "INDEX PAGE")
-}
+type QuestionController struct{}
 
-func IndexQuestion(c echo.Context) error {
+func (q *QuestionController) Index(c *gin.Context) {
 
+	fmt.Println("Controller")
+	//var data requests.PaginateRequest
+	//
+	//if c.BindJSON(&data) != nil {
+	//	c.JSON(422, gin.H{"message": "Validation error"})
+	//	c.Abort()
+	//	return
+	//}
 	var entities []models.ChallengeQuestion
 	database.DB().Limit(5).Find(&entities)
 
-	return c.JSON(http.StatusOK, entities)
+	if auth.Check() {
+		fmt.Println(auth.User())
+	}
+
+	c.JSON(http.StatusOK, entities)
 }
 
-func ShowQuestion(c echo.Context) error {
+func (q *QuestionController) Show(c *gin.Context) {
 
 	idString := c.Param("id")
 	id, _ := strconv.Atoi(idString)
@@ -28,5 +40,5 @@ func ShowQuestion(c echo.Context) error {
 	var entity models.ChallengeQuestion
 	database.DB().Where("id = ?", id).First(&entity)
 
-	return c.JSON(http.StatusOK, entity)
+	c.JSON(http.StatusOK, entity)
 }
