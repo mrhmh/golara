@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golara/app/http/requests"
 	"golara/app/models"
-	"golara/core/db"
+	"golara/core/facades"
 	"golara/core/facades/auth"
 	"net/http"
 	"strconv"
@@ -26,7 +26,7 @@ func (c *QuestionController) Index(ctx *gin.Context) {
 	}
 
 	var entities []models.ChallengeQuestion
-	db.DB().Limit(5).Find(&entities)
+	facades.DB().Limit(5).Find(&entities)
 
 	if auth.Check() {
 		fmt.Println(auth.User())
@@ -41,7 +41,7 @@ func (c *QuestionController) Show(ctx *gin.Context) {
 	id, _ := strconv.Atoi(idString)
 
 	var entity models.ChallengeQuestion
-	db.DB().Where("id = ?", id).First(&entity)
+	facades.DB().Where("id = ?", id).First(&entity)
 
 	ctx.JSON(http.StatusOK, entity)
 }

@@ -1,6 +1,6 @@
 package models
 
-import "golara/core/db"
+import "golara/core/facades"
 
 type User struct {
 	ID          uint   `json:"id"`
@@ -9,7 +9,7 @@ type User struct {
 
 func (u *User) GetUserByToken(token string) error {
 	var userToken UserToken
-	err := db.DB().Preload("User").Where("access_token = ?", token).First(&userToken).Error
+	err := facades.DB().Preload("User").Where("access_token = ?", token).First(&userToken).Error
 	if err != nil {
 		return err
 	}

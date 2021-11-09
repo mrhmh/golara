@@ -1,8 +1,8 @@
-package db
+package providers
 
 import (
 	"fmt"
-	"golara/core/config"
+	"golara/core/facades"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -10,11 +10,9 @@ import (
 
 type DBProvider struct{}
 
-var db *gorm.DB
-
 func (p *DBProvider) Boot() {
 
-	cfg := config.Config().Database.Mysql
+	cfg := facades.Config().Database.Mysql
 
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local", cfg.UserName, cfg.Password, cfg.Host, cfg.Port, cfg.Database)
 	db1, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
@@ -24,9 +22,5 @@ func (p *DBProvider) Boot() {
 		panic(err)
 	}
 
-	db = db1
-}
-
-func DB() *gorm.DB {
-	return db
+	facades.SetDB(db1)
 }
