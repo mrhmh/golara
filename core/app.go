@@ -18,7 +18,8 @@ func (a *App) registerServiceProviders() {
 	a.serviceProviders = []contracts.Provider{
 		new(providers.ConfigProvider),
 		new(providers.DBProvider),
-		new(providers.HttpServerProvider),
+		//new(providers.HttpServerProvider),
+		new(providers.GrpcServerProvider),
 	}
 }
 

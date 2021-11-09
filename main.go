@@ -1,8 +1,6 @@
 package main
 
-import (
-	"golara/core"
-)
+import "golara/core"
 
 func main() {
 

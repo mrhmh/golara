@@ -1,0 +1,17 @@
+syntax = "proto3"; // This denotes the protobuf version
+
+option go_package = "pb/pb";
+
+service Question {
+  rpc Index(PaginateRequest) returns (IndexResponse) {}
+}
+
+message PaginateRequest {
+  string page = 1;
+  string per_page = 2;
+}
+
+message IndexResponse {
+  string message = 1;
+  int32 code = 2;
+}

@@ -1,5 +1,6 @@
 package config
 
 type App struct {
-	Port uint `env:"APP_PORT"`
+	RestPort uint `env:"APP_REST_PORT"`
+	GrpcPORT uint `env:"APP_GRPC_PORT"`
 }

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"golara/app/http/middleware"
+	"golara/app/http/routes"
 	"golara/core/facades"
-	"golara/routes"
 	"reflect"
 )
 
@@ -37,5 +37,5 @@ func (p *HttpServerProvider) Boot() {
 		c.JSON(404, gin.H{"message": "Not found!!"})
 	})
 
-	r.Run(fmt.Sprintf(":%d", facades.Config().App.Port))
+	r.Run(fmt.Sprintf(":%d", facades.Config().App.RestPort))
 }

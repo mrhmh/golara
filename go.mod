@@ -16,9 +16,11 @@ require (
 	github.com/ugorji/go v1.2.6 // indirect
 	go.mongodb.org/mongo-driver v1.7.4 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
-	golang.org/x/net v0.0.0-20211105192438-b53810dc28af // indirect
-	golang.org/x/sys v0.0.0-20211107104306-e0b2ad06fe42 // indirect
-	google.golang.org/protobuf v1.27.1 // indirect
+	golang.org/x/net v0.0.0-20211108170745-6635138e15ea // indirect
+	golang.org/x/sys v0.0.0-20211109065445-02f5c0300f6e // indirect
+	google.golang.org/genproto v0.0.0-20211104193956-4c6863e31247 // indirect
+	google.golang.org/grpc v1.42.0
+	google.golang.org/protobuf v1.27.1
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/go-playground/validator.v8 v8.18.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
