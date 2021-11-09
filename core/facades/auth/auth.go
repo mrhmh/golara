@@ -1,6 +1,6 @@
 package auth
 
-import "golara/models"
+import "golara/app/models"
 
 type auth struct {
 	user models.User

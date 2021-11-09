@@ -1,11 +1,11 @@
 package main
 
 import (
-	"golara/app"
+	"golara/core"
 )
 
 func main() {
 
-	app.Boot()
+	new(core.App).Make()
 
 }

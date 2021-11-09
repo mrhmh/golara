@@ -1,0 +1,47 @@
+package controllers
+
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"golara/app/http/requests"
+	"golara/app/models"
+	"golara/core/db"
+	"golara/core/facades/auth"
+	"net/http"
+	"strconv"
+)
+
+type QuestionController struct {
+	BaseController
+}
+
+func (c *QuestionController) Index(ctx *gin.Context) {
+
+	var req requests.PaginateRequest
+
+	//validate
+	if ctx.ShouldBindQuery(&req) != nil {
+		c.validationError(ctx)
+		return
+	}
+
+	var entities []models.ChallengeQuestion
+	db.DB().Limit(5).Find(&entities)
+
+	if auth.Check() {
+		fmt.Println(auth.User())
+	}
+
+	ctx.JSON(http.StatusOK, entities)
+}
+
+func (c *QuestionController) Show(ctx *gin.Context) {
+
+	idString := ctx.Param("id")
+	id, _ := strconv.Atoi(idString)
+
+	var entity models.ChallengeQuestion
+	db.DB().Where("id = ?", id).First(&entity)
+
+	ctx.JSON(http.StatusOK, entity)
+}

@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"golara/app/contracts"
-	"golara/http/controllers"
+	"golara/app/http/controllers"
+	"golara/core/contracts"
 )
 
 func GetRoutes() []contracts.Route {
@@ -10,11 +10,6 @@ func GetRoutes() []contracts.Route {
 	questionController := new(controllers.QuestionController)
 
 	return []contracts.Route{
-		{
-			Method:     "GET",
-			Path:       "/",
-			Controller: controllers.Index,
-		},
 		{
 			Method:     "GET",
 			Path:       "/questions",

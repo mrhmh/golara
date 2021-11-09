@@ -3,13 +3,15 @@ package httpServer
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"golara/app/config"
-	"golara/http/middleware"
+	"golara/app/http/middleware"
+	"golara/core/config"
 	"golara/routes"
 	"reflect"
 )
 
-func InitHttpServer() {
+type HttpServerProvider struct{}
+
+func (p *HttpServerProvider) Boot() {
 	r := gin.Default()
 
 	r.Use(middleware.AuthToken)

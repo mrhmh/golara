@@ -1,5 +1,5 @@
 package requests
 
 type PaginateRequest struct {
-	Page string `json:"page" binding:"required"`
+	Page string `form:"page" binding:"required"`
 }

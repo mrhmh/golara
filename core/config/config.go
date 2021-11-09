@@ -7,9 +7,11 @@ import (
 	"log"
 )
 
+type ConfigProvider struct{}
+
 var cfg = config.Config{}
 
-func InitConfig() {
+func (p *ConfigProvider) Boot() {
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("Error loading .env file")
 	}

@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"golara/app/auth"
-	"golara/models"
+	"golara/app/models"
+	"golara/core/facades/auth"
 	"net/http"
 	"strings"
 )
