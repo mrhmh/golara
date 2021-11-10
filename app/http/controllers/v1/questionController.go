@@ -1,8 +1,9 @@
-package controllers
+package v1
 
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"golara/app/http/controllers"
 	"golara/app/http/requests"
 	"golara/app/models"
 	"golara/core/facades"
@@ -12,7 +13,7 @@ import (
 )
 
 type QuestionController struct {
-	BaseController
+	controllers.BaseController
 }
 
 func (c *QuestionController) Index(ctx *gin.Context) {
@@ -21,7 +22,7 @@ func (c *QuestionController) Index(ctx *gin.Context) {
 
 	//validate
 	if ctx.ShouldBindQuery(&req) != nil {
-		c.validationError(ctx)
+		c.ValidationError(ctx)
 		return
 	}
 

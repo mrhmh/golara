@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func RegisterServers(s *grpc.Server) {
+func RegisterRoutes(s *grpc.Server) {
 
 	pb.RegisterQuestionServer(s, controllers.NewQuestionController())
 

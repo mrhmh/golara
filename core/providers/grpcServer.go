@@ -3,7 +3,7 @@ package providers
 import (
 	"fmt"
 	appGrpc "golara/app/grpc"
-	"golara/app/grpc/interceptors"
+	"golara/app/grpc/middleware"
 	"golara/core/facades"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -22,7 +22,7 @@ func (p *GrpcServerProvider) Boot() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	authInterceptor := new(interceptors.AuthInterceptor)
+	authInterceptor := new(middleware.AuthInterceptor)
 
 	s := grpc.NewServer(
 		grpc.UnaryInterceptor(authInterceptor.Unary()),
@@ -30,7 +30,7 @@ func (p *GrpcServerProvider) Boot() {
 	reflection.Register(s)
 
 	//register servers
-	appGrpc.RegisterServers(s)
+	appGrpc.RegisterRoutes(s)
 
 	fmt.Printf("Listening and serving gRPC on :%d", port)
 
