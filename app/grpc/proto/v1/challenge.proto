@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "pb/v1";
+
+service Challenge {
+  rpc All(IndexRequest) returns (ChallengesResponse) {}
+}
+
+message IndexRequest {
+  string page = 1;
+  string per_page = 2;
+}
+
+message ChallengeResponse {
+  uint64 id = 1;
+  string title = 2;
+  string starts_at = 3;
+  string ends_at = 4;
+  string is_active = 5;
+  uint32 type = 6;
+}
+
+message ChallengesResponse{
+  repeated ChallengeResponse challenges = 1;
+}

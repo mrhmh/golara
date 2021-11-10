@@ -1,13 +1,13 @@
 package grpc
 
 import (
-	"golara/app/grpc/controllers"
-	"golara/app/grpc/pb"
+	v1controller "golara/app/grpc/controllers/v1"
+	v1server "golara/app/grpc/pb/v1"
 	"google.golang.org/grpc"
 )
 
 func RegisterRoutes(s *grpc.Server) {
 
-	pb.RegisterQuestionServer(s, controllers.NewQuestionController())
+	v1server.RegisterChallengeServer(s, v1controller.NewChallengeController())
 
 }

@@ -7,18 +7,13 @@ import (
 
 func GetRoutes() []contracts.Route {
 
-	questionControllerV1 := new(v1.QuestionController)
+	challengeControllerV1 := v1.NewChallengeController()
 
 	return []contracts.Route{
 		{
 			Method:     "GET",
-			Path:       "/questions",
-			Controller: questionControllerV1.Index,
-		},
-		{
-			Method:     "GET",
-			Path:       "/questions/:id",
-			Controller: questionControllerV1.Show,
+			Path:       "/challenges",
+			Controller: challengeControllerV1.All,
 		},
 	}
 }

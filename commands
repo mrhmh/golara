@@ -1,0 +1,6 @@
+
+# generate go code from proto
+    protoc  app/grpc/proto/v1/challenge.proto --go_out=plugins=grpc:app/grpc
+
+# Evans serve
+    evans.exe -r -p 9090

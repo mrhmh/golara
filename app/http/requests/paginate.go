@@ -1,5 +1,6 @@
 package requests
 
 type PaginateRequest struct {
-	Page string `form:"page" binding:"required"`
+	Page    int `form:"page" binding:"required"`
+	PerPage int `form:"per_page" binding:"required"`
 }
