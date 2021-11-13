@@ -13,7 +13,7 @@ type challengeController struct {
 
 func (c *challengeController) All(ctx context.Context, r *v1.IndexRequest) (*v1.ChallengesResponse, error) {
 
-	var filters map[string][]string
+	var filters map[string]interface{}
 	entities := c.repository.All(filters)
 
 	var challenges []*v1.ChallengeResponse

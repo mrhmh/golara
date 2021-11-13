@@ -5,5 +5,5 @@ import (
 )
 
 type ChallengeRepositoryInterface interface {
-	All(filters map[string][]string) []challenge.Challenge
+	All(filters map[string]interface{}) []challenge.Challenge
 }

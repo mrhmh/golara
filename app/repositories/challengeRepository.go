@@ -9,7 +9,7 @@ import (
 
 type challengeRepository struct{}
 
-func (r challengeRepository) All(filters map[string][]string) []challenge.Challenge {
+func (r challengeRepository) All(filters map[string]interface{}) []challenge.Challenge {
 
 	var entities []challenge.Challenge
 
@@ -23,17 +23,7 @@ func (r challengeRepository) All(filters map[string][]string) []challenge.Challe
 		}
 	}
 
-	page := "1"
-	perPage := "10"
-	if len(filters["page"]) > 0 {
-		page = filters["page"][0]
-	}
-
-	if len(filters["per_page"]) > 0 {
-		perPage = filters["per_page"][0]
-	}
-
-	query.Scopes(scopes.Paginate(page, perPage))
+	query.Scopes(scopes.Paginate(filters))
 	query.Find(&entities)
 
 	return entities

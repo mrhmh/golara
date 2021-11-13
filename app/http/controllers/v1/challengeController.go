@@ -2,6 +2,7 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
+	"golara/app/helpers"
 	"golara/app/http/controllers"
 	"golara/app/http/requests"
 	"golara/app/repositories"
@@ -24,7 +25,10 @@ func (c *challengeController) All(ctx *gin.Context) {
 		return
 	}
 
-	filters := ctx.Request.URL.Query()
+	//prepare filters
+	queries := ctx.Request.URL.Query()
+	filters := helpers.ConvertGinQueryToFilters(queries)
+
 	entities := c.repository.All(filters)
 
 	ctx.JSON(http.StatusOK, entities)
